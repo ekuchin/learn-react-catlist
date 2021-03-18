@@ -1,0 +1,46 @@
+ .catlist {
+    background: #FFF;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
+    width: 95%;
+    max-width: 900px;
+
+}
+
+.about{
+ align-items: center;
+ justify-content: center;
+}
+
+.btn {
+    border: none;
+    border-radius: 3px;
+    margin: auto 0;
+    padding: .5rem .75rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    font-size: .9rem;
+    letter-spacing: .5px;
+    transition: all .1s ease-in;
+}
+
+.btn-primary {
+    background: #6CB2EB;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #3490DC;
+}
+
+.btn-cancel {
+    background: #EF5753;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background: #E3342F;
+    color: #fff;
+}
