@@ -1,18 +1,21 @@
 import React from 'react';
 import Cat from "./Cat.js"
-import catsData from "../data/catsData.js"
+//import catsData from "../data/catsData.js"
 import CatChange from './CatChange.js';
+
+import {connect} from "react-redux"
+import {add, remove} from "../store/store.js"
 
 class CatList extends React.Component {
     constructor(){
         super()
         this.state={
-            cats:catsData,
+            //cats:catsData,
             isLoading:true
         }
         this.toggleAngry = this.toggleAngry.bind(this)
-        this.addCat = this.addCat.bind(this)
-        this.removeCat = this.removeCat.bind(this)
+        //this.addCat = this.addCat.bind(this)
+        //this.removeCat = this.removeCat.bind(this)
     }
     
     toggleAngry(id){
@@ -31,27 +34,6 @@ class CatList extends React.Component {
                 }
             })
             //console.log(updatedCats)
-            return {cats:updatedCats}
-        })
-
-    }
-
-    addCat(newCat){
-        console.log("addCat newCat")
-        console.log(newCat)
-        this.setState(prevState => {           
-            const newId=prevState.cats[prevState.cats.length-1].id+1
-            const idCat = {...newCat, id:newId}
-            const updatedCats = [...prevState.cats, idCat]
-            return {cats:updatedCats}
-        })
-        
-    }
-
-    removeCat(id){
-        console.log(id)
-        this.setState(prevState => {          
-            const updatedCats = prevState.cats.filter(cat => cat.id !== id)
             return {cats:updatedCats}
         })
 
@@ -80,22 +62,22 @@ class CatList extends React.Component {
         if (this.state.isLoading){
             return <h1>Подождите, котики загружаются</h1>
         }
-        const catArray = this.state.cats.map(cat =>
+        const catArray = this.props.cats.map(cat =>
             <Cat
                 key={cat.id}
                 cat={cat}
                 toggleAngry={this.toggleAngry}
-                removeCat={this.removeCat}
+                removeCat={this.props.remove}
             />)
         
         return(
             <div>
                 <h1>Это список котов</h1>
                 {catArray}
-                <CatChange addCat={this.addCat}/>
+                <CatChange addCat={this.props.add}/>
             </div>
         )
     }
 }
 
-export default CatList;
+export default connect(state => ({cats: state}), {add,remove})(CatList)
